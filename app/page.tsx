@@ -1,7 +1,7 @@
 import SimpleButton from "@/components/custom/SimpleButton"
 import SimpleIconButton from "@/components/custom/SimpleIconButton";
 import { ComponentGrid } from "@/components/custom/ComponentGrid";
-import { Component, Zap } from 'lucide-react';
+import { Zap } from 'lucide-react';
 
 export default function Home() {
 

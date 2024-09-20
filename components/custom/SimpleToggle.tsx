@@ -1,10 +1,10 @@
-import React from 'react';
-import { LucideIcon } from 'lucide-react';
+"use client"
 
-// Define the color options as a union type
+import React, { useState } from 'react';
+
+// Define the color options for this component
 type ColorOption = 'amber' | 'indigo' | 'crimson' | 'gray' | 'superdarkgray' | 'emerald' | 'apollo';
 
-// Define the styles object with a properly typed key and higher transparency values
 const colorStyles: Record<ColorOption, {
     from: string;
     to: string;
@@ -55,29 +55,30 @@ const colorStyles: Record<ColorOption, {
       shadow: 'shadow-emerald-500/30',
     },
     apollo: {
-        from: 'from-indigo-500/75', // #6366f1 maps to indigo-500
-        to: 'to-blue-700/75',       // A complementary deeper shade for gradient effect
-        text: 'text-white',         // Keep the text white for good contrast
-        ring: 'ring-indigo-500/60', // Use the base indigo color for the ring
-        shadow: 'shadow-indigo-500/30', // A lighter shadow with indigo tone
-      }
+      from: 'from-indigo-500/75', // #6366f1 maps to indigo-500
+      to: 'to-blue-700/75',       // A complementary deeper shade for gradient effect
+      text: 'text-white',         // Keep the text white for good contrast
+      ring: 'ring-indigo-500/60', // Use the base indigo color for the ring
+      shadow: 'shadow-indigo-500/30', // A lighter shadow with indigo tone
+    }
   };
 
-interface SimpleIconButtonProps {
-  icon: LucideIcon;
-  color?: ColorOption; // Define the color prop as optional, defaulting to 'amber'
+interface SimpleToggleProps {
+  color?: ColorOption;
 }
 
-const SimpleIconButton: React.FC<SimpleIconButtonProps> = ({ icon: Icon, color = 'amber' }) => {
-  const styles = colorStyles[color]; // TypeScript now knows `color` is one of the valid keys
+const SimpleToggle: React.FC<SimpleToggleProps> = ({ color = 'emerald' }) => {
+  const [isOn, setIsOn] = useState(false);
+  const styles = colorStyles[color];
 
   return (
     <button
-      className={`flex justify-center items-center shrink-0 bg-gradient-to-br ${styles.from} ${styles.to} ${styles.text} ${styles.ring} ${styles.shadow} ring-1 shadow-xl rounded-xl w-12 h-12 transition-all duration-150 ease-in-out transform hover:brightness-105 active:scale-95`}
+      onClick={() => setIsOn(!isOn)}
+      className={`flex justify-center items-center shrink-0 bg-gradient-to-br ${styles.from} ${styles.to} ${styles.text} ${styles.ring} ${styles.shadow} ring-1 shadow-xl rounded-xl w-48 h-12 font-semibold transition-all duration-150 ease-in-out transform hover:brightness-105 active:scale-95 font-hopesans`}
     >
-      <Icon className="w-6 h-6" />
+      {isOn ? 'ON' : 'OFF'}
     </button>
   );
 };
 
-export default SimpleIconButton;
+export default SimpleToggle;

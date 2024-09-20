@@ -64,5 +64,13 @@ const config: Config = {
   	}
   },
   plugins: [require("tailwindcss-animate")],
+  safelist: [
+    {
+      pattern: /^from-(yellow|red|blue|green|indigo|purple|pink|emerald|amber|gray|black|white)-\d{3}(\/\d{2})?$/,
+    },
+    {
+      pattern: /^to-(yellow|red|blue|green|indigo|purple|pink|emerald|amber|gray|black|white)-\d{3}(\/\d{2})?$/,
+    },
+  ],
 };
 export default config;

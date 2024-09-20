@@ -1,9 +1,9 @@
 import React from 'react';
 
-// Define the color options as a union type
-type ColorOption = 'amber' | 'indigo' | 'crimson' | 'gray' | 'superdarkgray';
+// Define the color options for this component
+type ColorOption = 'amber' | 'indigo' | 'crimson' | 'gray' | 'superdarkgray' | 'emerald' | 'apollo';
 
-// Define the styles object with a properly typed key
+// Define the styles object
 const colorStyles: Record<ColorOption, {
   from: string;
   to: string;
@@ -46,20 +46,36 @@ const colorStyles: Record<ColorOption, {
     ring: 'ring-black/60',
     shadow: 'shadow-black/30',
   },
+  emerald: {
+    from: 'from-emerald-400/75',
+    to: 'to-emerald-600/75',
+    text: 'text-white',
+    ring: 'ring-emerald-500/60',
+    shadow: 'shadow-emerald-500/30',
+  },
+  apollo: {
+    from: 'from-indigo-500/75', // #6366f1 maps to indigo-500
+    to: 'to-blue-700/75',       // A complementary deeper shade for gradient effect
+    text: 'text-white',         // Keep the text white for good contrast
+    ring: 'ring-indigo-500/60', // Use the base indigo color for the ring
+    shadow: 'shadow-indigo-500/30', // A lighter shadow with indigo tone
+  }
+
 };
 
 interface SimpleButtonProps {
   color?: ColorOption; // Define the color prop as optional, defaulting to 'amber'
+  buttonText?: string; // Define the buttonText prop as optional, defaulting to 'Hello Button'
 }
 
-const SimpleButton: React.FC<SimpleButtonProps> = ({ color = 'amber' }) => {
-  const styles = colorStyles[color]; // TypeScript now knows `color` is one of the valid keys
+const SimpleButton: React.FC<SimpleButtonProps> = ({ color = 'amber', buttonText = 'Hello Button' }) => {
+  const styles = colorStyles[color]; // Get the style for the selected color
   
   return (
     <button
       className={`flex justify-center items-center shrink-0 bg-gradient-to-br ${styles.from} ${styles.to} ${styles.text} ${styles.ring} ${styles.shadow} ring-1 shadow-xl rounded-xl w-48 h-12 font-semibold transition-all duration-150 ease-in-out transform hover:brightness-105 active:scale-95 font-hopesans`}
     >
-      Hello Button
+      {buttonText}
     </button>
   );
 };
